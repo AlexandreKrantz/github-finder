@@ -1,4 +1,5 @@
 const github = new Github();
+const ui = new UI();
 
 const searchUser = document
   .getElementById("searchUser")
@@ -8,12 +9,13 @@ const searchUser = document
       github.getUser(userText).then((userData) => {
         console.log(userData.profile);
         if (userData.profile.message == "Not Found") {
-          //show alert
+          ui.showAlert("User not found", "alert alert-danger");
         } else {
-          //show profile
+          ui.showProfile(userData.profile);
+          ui.showRepos(userData.repos);
         }
       });
     } else {
-      //clear profile from UI
+      ui.clearProfile();
     }
   });
